@@ -101,7 +101,7 @@ To obtain difference equation using Trapezoidal rule, we need to integrate \ref{
 \end{align}
 from \ref{eq.4}
 \begin{align}
-     \sbrak { P\brak{t_{n+1}} -P\brak{t_n}}=\frac{h}{2}\sbrak{\frac{P\brak{t_n}+P\brak{t_{n+1}}}{20}}
+     \sbrak { P\brak{t_{n+1}} -P\brak{t_n}}=\frac{h}{2}\sbrak{\frac{P\brak{t_n}+P\brak{t_{n+1}}}{20}}\label{t.r}
 \end{align}
 Here, $h=t_{n+1}-t_n$, Which gives
 \begin{align}
@@ -120,6 +120,36 @@ Choosing $h=1yr$,
     P_{n}&=P_0\sbrak{\frac{41}{39} }^{n} \label{eq.7}
 \end{align}
 Substituting $P_0=1000$ and $P_n=2000$ in \ref{eq.7}, we get $n\approx 13.86$,which means $P_{13}<2000<P_{14}.$
+\textbf{Usage of Bilinear transform:}
+For the equation \ref{eq.1} take the Laplace of the RHS to be  $X\brak{s}$.
+\begin{align}
+    \frac{dp}{dt}&=h\brak{t}\\
+    h\brak{t}&= \frac{p}{20}
+\end{align}
+Applying Laplace Transform on both sides and using Laplace properties, we get
+\begin{align}
+    sY\brak{s}=X\brak{s}
+\end{align}
+Substituting in the Transfer Function,
+\begin{align}
+    H\brak{s}&=\frac{Y\brak{s}}{X\brak{s}}\\
+    H\brak{s}&=\frac{1}{s}\label{eq.8}
+\end{align}
+Now, we have to apply Bilinear Transform on both sides of \ref{eq.8}, which is conversion of $s$-domain to $z$-domain.
+\begin{align}
+    s&=\frac{2}{h}\frac{1-\frac{1}{z}}{1+\frac{1}{z}}\\
+    H\brak{z}&=\frac{h}{2}\frac{1+\frac{1}{z}}{1-\frac{1}{z}}\\
+    \frac{Y\brak{z}}{X\brak{z}}&=\frac{h}{2}\frac{1+\frac{1}{z}}{1-\frac{1}{z}}\\
+    \brak{1-\frac{1}{z}}Y\brak{z}&=\frac{h}{2}\brak{1+\frac{1}{z}}X\brak{z}\label{eq.9}
+\end{align}
+Apply Inverse z-transform on both sides of \ref{eq.9},
+\begin{align}
+    P_{n+1}-P_{n}&=\frac{h}{2}\brak{h\brak{t_n}+h\brak{t_{n+1}}}\\
+    P_{n+1}&=P_{n}+\frac{h}{2}\brak{h\brak{t_n}+h\brak{t_{n+1}}}\\
+    P_{n+1}&=P_{n}+\frac{h}{2}\brak{\frac{P\brak{t_n}+P\brak{t_{n+1}}}{20}}
+\end{align}
+which is same as \ref{t.r}.
+
 
 \begin{figure}[h!]
     \centering
